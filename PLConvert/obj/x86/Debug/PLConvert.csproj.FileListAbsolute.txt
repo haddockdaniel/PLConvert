@@ -1,0 +1,7 @@
+C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\PLConvert\PLConvert\obj\x86\Debug\PLConvert.csprojResolveAssemblyReference.cache
+C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\PLConvert\PLConvert\bin\x86\Debug\PLConvert.dll
+C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\PLConvert\PLConvert\bin\x86\Debug\PLConvert.pdb
+C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\PLConvert\PLConvert\bin\x86\Debug\ConvHelper.dll
+C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\PLConvert\PLConvert\bin\x86\Debug\Interop.PLXMLLnkLib.dll
+C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\PLConvert\PLConvert\obj\x86\Debug\PLConvert.dll
+C:\Users\haddocdx\Documents\Visual Studio 2012\Projects\PLConvert\PLConvert\obj\x86\Debug\PLConvert.pdb

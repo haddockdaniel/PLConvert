@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Users\haddocdx\Desktop\Conv DLLs\PLConvert.dll-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AB3B7DF5-209D-45AC-9BA8-7D4A4C8AFE85}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>PLConvert</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>PLConvert</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ConvHelper">
+      <HintPath>..\..\..\..\..\Desktop\Conv DLLs\ConvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.PLXMLLnkLib">
+      <HintPath>lib\Interop.PLXMLLnkLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PCLaw15Extensions.cs" />
+    <Compile Include="PLXMLData.cs" />
+    <Compile Include="TransactionData.cs" />
+    <Compile Include="PLGBAlloc.cs" />
+    <Compile Include="PLGBARAlloc.cs" />
+    <Compile Include="StaticData.cs" />
+    <Compile Include="PLGLAccts.cs" />
+    <Compile Include="PLDiary.cs" />
+    <Compile Include="PLExpense.cs" />
+    <Compile Include="PLDepartment.cs" />
+    <Compile Include="PLContact.cs" />
+    <Compile Include="PLExpCode.cs" />
+    <Compile Include="PLSafeCustPacket.cs" />
+    <Compile Include="Maps.cs" />
+    <Compile Include="MapStrToObj.cs" />
+    <Compile Include="PLGJEntry.cs" />
+    <Compile Include="PLCustomTab.cs" />
+    <Compile Include="PLPayableEntry.cs" />
+    <Compile Include="PLConfig.cs" />
+    <Compile Include="PLMatter.cs" />
+    <Compile Include="APAlloc.cs" />
+    <Compile Include="PLWUD.cs" />
+    <Compile Include="PLDiaryCode.cs" />
+    <Compile Include="PLPhone.cs" />
+    <Compile Include="PLWOAlloc.cs" />
+    <Compile Include="PLTBEnt.cs" />
+    <Compile Include="PLContactType.cs" />
+    <Compile Include="PLSafeCustType.cs" />
+    <Compile Include="PLLink.cs" />
+    <Compile Include="PLTBAlloc.cs" />
+    <Compile Include="PLSafeCustStatus.cs" />
+    <Compile Include="PLRefSource.cs" />
+    <Compile Include="PLTimeEntry.cs" />
+    <Compile Include="PLGBAcct.cs" />
+    <Compile Include="PLTask.cs" />
+    <Compile Include="PLLawyer.cs" />
+    <Compile Include="PLGenInfo.cs" />
+    <Compile Include="PLUser.cs" />
+    <Compile Include="PLGBAllocSingle.cs" />
+    <Compile Include="PLARLawyerAlloc.cs" />
+    <Compile Include="PLSafeCustEntry.cs" />
+    <Compile Include="PLSafeCustStage.cs" />
+    <Compile Include="PLLocationCode.cs" />
+    <Compile Include="PLGBTranObj.cs" />
+    <Compile Include="PLRate.cs" />
+    <Compile Include="PLClient.cs" />
+    <Compile Include="PCLawConversion.cs" />
+    <Compile Include="PLName.cs" />
+    <Compile Include="PLTypeOfLaw.cs" />
+    <Compile Include="CPostItem.cs" />
+    <Compile Include="CPLLogging.cs" />
+    <Compile Include="PLAddress.cs" />
+    <Compile Include="PLSafeCustStageGroup.cs" />
+    <Compile Include="PLSafeCustMovement.cs" />
+    <Compile Include="PLVendor.cs" />
+    <Compile Include="PLTBAcct.cs" />
+    <Compile Include="PLGBEnt.cs" />
+    <Compile Include="PLBilling.cs" />
+    <Compile Include="PLSettings\SettingsList.cs" />
+    <Compile Include="PLSettings\SettingsContainer.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
