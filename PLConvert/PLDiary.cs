@@ -12,6 +12,8 @@ namespace PLConvert
   public class PLDiary : TransactionData
   {
     private CPostItem m_MatterID;
+    private CPostItem m_EntryID;
+    private CPostItem m_Active;
     private CPostItem m_DiaryCodeID;
     private CPostItem m_LocationID;
     private CPostItem m_ReminderDate;
@@ -25,7 +27,7 @@ namespace PLConvert
     private CPostItem m_DurationSeconds;
     private CPostItem m_ActionOrNotes;
     private CPostItem m_LawyerID;
-    private List<int> ArrLawyers;
+    //private List<int> ArrLawyers;
     private List<bool> ArrMSGRead;
     private CPostItem m_ContactID;
     private List<int> ArrContacts;
@@ -81,6 +83,30 @@ namespace PLConvert
       {
         this.m_CallOut.SetValue(value);
       }
+    }
+
+    public PLXMLData.eSTATUS Active
+    {
+        get
+        {
+            return (PLXMLData.eSTATUS)this.m_Status.nValue;
+        }
+        set
+        {
+            this.m_Status.SetValue((int)value);
+        }
+    }
+
+    public int EntryID
+    {
+        get
+        {
+            return this.m_EntryID.nValue;
+        }
+        set
+        {
+            this.m_EntryID.SetValue(value);
+        }
     }
 
     public string CallPhoneNumber
@@ -261,6 +287,42 @@ namespace PLConvert
       {
         this.m_MatterID.SetValue(value);
       }
+    }
+
+    public int LawyerID
+    {
+        get
+        {
+            return this.m_LawyerID.nValue;
+        }
+        set
+        {
+            this.m_LawyerID.SetValue(value);
+        }
+    }
+
+    public int UserID
+    {
+        get
+        {
+            return this.m_MsgUserID.nValue;
+        }
+        set
+        {
+            this.m_MsgUserID.SetValue(value);
+        }
+    }
+
+    public int ContactID
+    {
+        get
+        {
+            return this.m_ContactID.nValue;
+        }
+        set
+        {
+            this.m_ContactID.SetValue(value);
+        }
     }
 
     public string MatterNN
@@ -573,19 +635,15 @@ namespace PLConvert
       this.ArrContacts.Add(nID);
     }
 
-    public void AddLawyer(string sNN)
-    {
-      if (PLLawyer.GetIDFromNN(sNN) <= 0)
-        return;
-      this.ArrLawyers.Add(PLLawyer.GetIDFromNN(sNN));
-    }
+  //  public void AddLawyer(string sNN)
+  ////  {
+   //     this.m_LawyerID.nValue = 
+  //  }
 
-    public void AddLawyer(int nID)
-    {
-      if ((nID <= 0 ? 0 : (!this.ArrLawyers.Contains(nID) ? 1 : 0)) == 0)
-        return;
-      this.ArrLawyers.Add(nID);
-    }
+   // public void AddLawyer(int nID)
+   // {
+  //      this.m_LawyerID.SetValue(nID);
+  //  }
 
     public override void AddRecord()
     {
@@ -628,7 +686,7 @@ namespace PLConvert
         this.ReminderDate = this.DueDate;
       if (this.EntryType == PLDiary.eType.Holiday)
       {
-        this.ArrLawyers.Clear();
+        //this.ArrLawyers.Clear();
         this.ArrMSGRead.Clear();
         this.ArrContacts.Clear();
         this.m_StartTime.Clear();
@@ -636,38 +694,20 @@ namespace PLConvert
         this.m_ReminderDate.Clear();
       }
       this.Completed = this.m_CompletionDate.m_bIsSet;
-      if (this.ArrLawyers.Count > 0)
+      if ((m_LawyerID != null && m_MsgUserID != null) && (m_LawyerID.nValue > 0 && m_MsgUserID.nValue > 0))
       {
-        if ((entryType == PLDiary.eType.Call ? 0 : (entryType != PLDiary.eType.Message ? 1 : 0)) != 0)
-        {
-          for (int nRepeat = 1; nRepeat <= this.ArrLawyers.Count; ++nRepeat)
-          {
-            this.m_LawyerID.SetValue(Convert.ToInt32(this.ArrLawyers[nRepeat - 1]));
-            this.m_LawyerID.AddRepeatField(this.m_hndPOST, nRepeat);
-          }
-        }
-        else
-        {
-          for (int nRepeat = 1; nRepeat <= this.ArrLawyers.Count; ++nRepeat)
-          {
-            this.m_MsgUserID.SetValue(Convert.ToInt32(this.ArrLawyers[nRepeat - 1]));
-            this.m_PhoneCallRead.SetValue(Convert.ToBoolean(this.ArrMSGRead[nRepeat - 1]));
-            this.m_MsgUserID.AddRepeatField(this.m_hndPOST, nRepeat);
-            this.m_PhoneCallRead.AddRepeatField(this.m_hndPOST, nRepeat);
-          }
-        }
-        this.ArrLawyers.Clear();
+          this.m_LawyerID.AddField(this.m_hndPOST);
+          //this.m_MsgUserID.SetValue(m_MsgUserID.nValue);
+          this.m_MsgUserID.AddField(this.m_hndPOST);
+
         this.ArrMSGRead.Clear();
       }
-      else if (entryType == PLDiary.eType.Appointment || entryType == PLDiary.eType.Notes || entryType == PLDiary.eType.TODO)
+      else
       {
-        this.m_LawyerID.SetValue(PLLawyer.GetIDFromNN("IT~"));
-        this.m_LawyerID.AddRepeatField(this.m_hndPOST, 1);
-      }
-      else if ((entryType == PLDiary.eType.Call ? 1 : (entryType == PLDiary.eType.Message ? 1 : 0)) != 0)
-      {
-        this.m_MsgUserID.SetValue(PLUser.GetIDFromNN("ADMIN"));
-        this.m_MsgUserID.AddRepeatField(this.m_hndPOST, 1);
+          this.m_LawyerID.SetValue(PLLawyer.GetIDFromNN("~IT"));
+          this.m_LawyerID.AddField(this.m_hndPOST);
+          this.m_MsgUserID.SetValue(PLLawyer.GetIDFromNN("~IT"));
+          this.m_MsgUserID.AddField(this.m_hndPOST);
       }
       base.AddRecord();
       this.m_EntryType.AddField(this.m_hndPOST);
@@ -688,25 +728,10 @@ namespace PLConvert
       this.Send();
     }
 
-    public void AddUser(int nID, bool bMSGRead)
-    {
-      if (nID == 0)
-        return;
-      this.ArrLawyers.Add(nID);
-      this.ArrMSGRead.Add(bMSGRead);
-    }
-
-    public void AddUser(string sNN, bool bMSGRead)
-    {
-      if (PLUser.GetIDFromNN(sNN) == 0)
-        return;
-      this.AddUser(PLUser.GetIDFromNN(sNN), bMSGRead);
-    }
 
     public override void Clear()
     {
       base.Clear();
-      this.ArrLawyers.Clear();
       this.ArrMSGRead.Clear();
       this.m_LawyerID.Clear();
       this.m_MsgUserID.Clear();
@@ -714,6 +739,7 @@ namespace PLConvert
       this.ArrContacts.Clear();
       this.m_ContactID.Clear();
       this.m_MsgUserID.Clear();
+      this.m_EntryID.Clear();
       this.m_PhoneCallRead.Clear();
       this.AllDayEvent = false;
     }
@@ -793,12 +819,8 @@ namespace PLConvert
       CPostItem cpostItem26 = cpostItem25;
       this.m_ActionOrNotes = cpostItem25;
       postItems13.Add(cpostItem26);
-      this.ArrLawyers = new List<int>();
       this.ArrMSGRead = new List<bool>();
-      this.m_LawyerID = new CPostItem(CPostItem.DataType.RepeatLONG, "LawyerID");
       this.ArrContacts = new List<int>();
-      this.m_ContactID = new CPostItem(CPostItem.DataType.RepeatLONG, "ContactID");
-      this.m_MsgUserID = new CPostItem(CPostItem.DataType.RepeatLONG, "MsgUserID");
       this.m_PhoneCallRead = new CPostItem(CPostItem.DataType.RepeatBOOL, "PhoneCallReadUnread");
       List<CPostItem> postItems14 = this.PostItems;
       CPostItem cpostItem27 = new CPostItem(CPostItem.DataType.STRING, "DiaryEntrySubject");
@@ -925,6 +947,47 @@ namespace PLConvert
       CPostItem cpostItem76 = cpostItem75;
       this.m_RecurringDescription = cpostItem75;
       postItems38.Add(cpostItem76);
+
+      List<CPostItem> postItems39 = this.PostItems;
+      CPostItem cpostItem77 = new CPostItem(CPostItem.DataType.LONG, "DiaryEntryID");
+      CPostItem cpostItem78 = cpostItem77;
+      this.m_EntryID = cpostItem77;
+      postItems39.Add(cpostItem78);
+
+      List<CPostItem> postItems40 = this.PostItems;
+      CPostItem cpostItem79 = new CPostItem(CPostItem.DataType.LONG, "ContactID");
+      CPostItem cpostItem80 = cpostItem79;
+      this.m_ContactID = cpostItem79;
+      postItems40.Add(cpostItem80);
+
+      List<CPostItem> postItems41 = this.PostItems;
+      CPostItem cpostItem81 = new CPostItem(CPostItem.DataType.LONG, "DiaryUserID");
+      CPostItem cpostItem82 = cpostItem81;
+      this.m_LawyerID = cpostItem81;
+      postItems41.Add(cpostItem82);
+
+      List<CPostItem> postItems42 = this.PostItems;
+      CPostItem cpostItem83 = new CPostItem(CPostItem.DataType.LONG, "DiaryEntryStatus");
+      CPostItem cpostItem84 = cpostItem83;
+      this.m_Status = cpostItem83;
+      postItems42.Add(cpostItem84);
+
+      List<CPostItem> postItems43 = this.PostItems;
+      CPostItem cpostItem85 = new CPostItem(CPostItem.DataType.LONG, "MsgUserID");
+      CPostItem cpostItem86 = cpostItem85;
+      this.m_MsgUserID = cpostItem85;
+      postItems43.Add(cpostItem86);
+
+      //this.m_LawyerID = new CPostItem(CPostItem.DataType.RepeatLONG, "LawyerID");
+    //  this.m_ContactID = new CPostItem(CPostItem.DataType.RepeatLONG, "ContactID");
+     // this.m_MsgUserID = new CPostItem(CPostItem.DataType.RepeatLONG, "MsgUserID");
+     // this.m_EntryID = new CPostItem(CPostItem.DataType.RepeatLONG, "DiaryEntryID");
+
+
+
+
+
+
       this.AllDayEvent = false;
     }
 

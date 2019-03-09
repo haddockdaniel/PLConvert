@@ -28,6 +28,7 @@ namespace PLConvert
     private List<PLContact.ContactMatter> conMatters;
     private CPostItem m_PartyId;
     private CPostItem m_AssocMatt;
+    private CPostItem m_MatterID;
     private CPostItem m_AssocMattRole;
     private CPostItem m_AssocMattDelete;
     private CPostItem m_CustomTabID;
@@ -109,6 +110,19 @@ namespace PLConvert
       {
         this.m_Notes.SetValue(value);
       }
+    }
+
+    public int MatterID
+    {
+        get
+        {
+            return this.m_MatterID.nValue;
+        }
+        set
+        {
+            this.m_MatterID.SetValue(value);
+        }
+
     }
 
     public PLContact()
@@ -421,6 +435,7 @@ namespace PLConvert
       this.m_Notes.GetField(this.m_hndExisting);
       this.m_MainContTypeID.GetField(this.m_hndExisting);
       this.m_LawyerID.GetField(this.m_hndExisting);
+      this.m_MatterID.GetField(this.m_hndExisting);
     }
 
     public static int GetIDFromExtID1(string Key)
@@ -477,6 +492,7 @@ namespace PLConvert
         this.ContTypes.Add(this.m_ContTypeID.nValue);
       }
       this.m_LawyerID.GetField(this.m_hndGET);
+      this.m_MatterID.GetField(this.m_hndGET);
     }
 
     protected override void Initialize()
@@ -521,6 +537,13 @@ namespace PLConvert
       CPostItem cpostItem14 = cpostItem13;
       this.m_QuickBooksID = cpostItem13;
       postItems7.Add(cpostItem14);
+
+      List<CPostItem> postItems8 = this.PostItems;
+      CPostItem cpostItem15 = new CPostItem(CPostItem.DataType.LONG, "PartyMatterID");
+      CPostItem cpostItem16 = cpostItem15;
+      this.m_MatterID = cpostItem15;
+      postItems8.Add(cpostItem16);
+
       this.m_ContTypeID = new CPostItem(CPostItem.DataType.RepeatLONG, "ContactTypeTypeID");
       this.ContTypes = new List<int>();
       this.conMatters = new List<PLContact.ContactMatter>();
